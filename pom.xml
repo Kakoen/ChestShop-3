@@ -85,11 +85,13 @@
             <artifactId>odditem</artifactId>
             <version>0.9.5</version>
         </dependency>
+        <!-- 
         <dependency>
             <groupId>com.herocraftonline.heroes</groupId>
             <artifactId>Heroes</artifactId>
             <version>1.5.5.4-SNAPSHOT</version>
         </dependency>
+         -->
         <dependency>
             <groupId>com.griefcraft.lwc</groupId>
             <artifactId>lwc</artifactId>

@@ -96,16 +96,6 @@ public class Dependencies {
 
                 break;
 
-            //Other plugins
-            case Heroes:
-                Heroes heroes = Heroes.getHeroes(plugin);
-
-                if (heroes == null) {
-                    return;
-                }
-
-                listener = heroes;
-                break;
             case OddItem:
                 MaterialUtil.Odd.initialize();
                 break;
@@ -128,8 +118,6 @@ public class Dependencies {
 
         OddItem,
 
-        WorldGuard,
-
-        Heroes
+        WorldGuard
     }
 }
