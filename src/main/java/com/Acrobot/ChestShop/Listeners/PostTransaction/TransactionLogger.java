@@ -4,6 +4,9 @@ import com.Acrobot.Breeze.Utils.LocationUtil;
 import com.Acrobot.ChestShop.ChestShop;
 import com.Acrobot.ChestShop.Events.TransactionEvent;
 import com.Acrobot.ChestShop.UUIDs.NameManager;
+
+import net.musicmaniak.ChestShop.limiter.TransactionLimiter;
+
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -24,14 +27,20 @@ public class TransactionLogger implements Listener {
         ChestShop.getBukkitServer().getScheduler().runTaskAsynchronously(ChestShop.getPlugin(), new Runnable() {
             @Override
             public void run() {
+            	
                 String template = (event.getTransactionType() == BUY ? BUY_MESSAGE : SELL_MESSAGE);
 
                 StringBuilder items = new StringBuilder(50);
 
+                int amount = 0;
+                
                 for (ItemStack item : event.getStock()) {
                     items.append(item.getAmount()).append(' ').append(getSignName(item));
+                    amount += item.getAmount();
                 }
 
+                TransactionLimiter.addToHistory(event.getSign(), event.getClient(), amount);
+                
                 String message = String.format(template,
                         event.getClient().getName(),
                         items.toString(),

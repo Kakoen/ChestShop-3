@@ -11,6 +11,8 @@ public class PriceUtil {
 
     public static final char BUY_INDICATOR = 'b';
     public static final char SELL_INDICATOR = 's';
+    public static final char LIMIT_INDICATOR = 'l';
+    public static final char LIMIT_PERIOD_INDICATOR = 'p';
 
     /**
      * Gets the price from the text
@@ -64,6 +66,30 @@ public class PriceUtil {
      * @param text Text to check
      * @return Sell price
      */
+    public static double getLimit(String text) {
+        return get(text, LIMIT_INDICATOR);
+    }
+    
+    /**
+     * Gets the buy price from te text
+     *
+     * @param text Text to check
+     * @return Buy price
+     */
+    public static long getLimitPeriod(String text) {
+    	long result = (long)get(text, LIMIT_PERIOD_INDICATOR);
+    	if(result > 0) {
+    		result = result * 60 * 60 * 1000;
+    	}
+        return result;
+    }
+
+    /**
+     * Gets the sell price from te text
+     *
+     * @param text Text to check
+     * @return Sell price
+     */
     public static double getSellPrice(String text) {
         return get(text, SELL_INDICATOR);
     }
@@ -86,6 +112,26 @@ public class PriceUtil {
      */
     public static boolean hasSellPrice(String text) {
         return hasPrice(text, SELL_INDICATOR);
+    }
+    
+    /**
+     * Tells if there is a limit
+     *
+     * @param text Price text
+     * @return If there is a buy limit
+     */
+    public static boolean hasBuyLimit(String text) {
+        return hasPrice(text, LIMIT_INDICATOR);
+    }
+
+    /**
+     * Tells if there is a limit period
+     *
+     * @param text Price text
+     * @return If there is a sell price
+     */
+    public static boolean hasLimitPeriod(String text) {
+        return hasPrice(text, LIMIT_PERIOD_INDICATOR);
     }
 
     /**
@@ -113,3 +159,4 @@ public class PriceUtil {
         return text.trim().equalsIgnoreCase(FREE_TEXT);
     }
 }
+

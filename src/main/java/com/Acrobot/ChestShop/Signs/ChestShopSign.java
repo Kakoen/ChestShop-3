@@ -27,7 +27,7 @@ public class ChestShopSign {
     public static final Pattern[] SHOP_SIGN_PATTERN = {
             Pattern.compile("^?[\\w -.]*$"),
             Pattern.compile("^[1-9][0-9]*$"),
-            Pattern.compile("(?i)^[\\d.bs(free) :]+$"),
+            Pattern.compile("(?i)^[\\d.bslp(free): ]+$"),
             Pattern.compile("^[\\w? #:-]+$")
     };
 
@@ -90,6 +90,6 @@ public class ChestShopSign {
                 return false;
             }
         }
-        return lines[PRICE_LINE].indexOf(':') == lines[PRICE_LINE].lastIndexOf(':');
+        return true;
     }
 }

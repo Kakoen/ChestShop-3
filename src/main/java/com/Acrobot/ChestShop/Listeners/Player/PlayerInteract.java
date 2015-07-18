@@ -128,6 +128,13 @@ public class PlayerInteract implements Listener {
 
         Action buy = Properties.REVERSE_BUTTONS ? LEFT_CLICK_BLOCK : RIGHT_CLICK_BLOCK;
         double price = (action == buy ? PriceUtil.getBuyPrice(prices) : PriceUtil.getSellPrice(prices));
+        
+        double limit = Double.MAX_VALUE;
+        long limitPeriod = Long.MAX_VALUE;
+        if(PriceUtil.hasBuyLimit(prices)) {
+        	limit = PriceUtil.getLimit(prices);
+        	limitPeriod = PriceUtil.getLimitPeriod(prices);
+        }
 
         Chest chest = uBlock.findConnectedChest(sign);
         Inventory ownerInventory = (ChestShopSign.isAdminShop(sign) ? new AdminInventory() : chest != null ? chest.getInventory() : null);
@@ -158,7 +165,7 @@ public class PlayerInteract implements Listener {
         ItemStack[] items = {item};
 
         TransactionType transactionType = (action == buy ? BUY : SELL);
-        return new PreTransactionEvent(ownerInventory, player.getInventory(), items, price, player, owner, sign, transactionType);
+        return new PreTransactionEvent(ownerInventory, player.getInventory(), items, price, player, owner, sign, transactionType, limit, limitPeriod);
     }
 
     private static boolean isAllowedForShift(boolean buyTransaction) {

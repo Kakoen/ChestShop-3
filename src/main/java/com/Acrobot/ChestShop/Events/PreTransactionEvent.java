@@ -32,8 +32,11 @@ public class PreTransactionEvent extends Event {
     private double price;
 
     private TransactionOutcome transactionOutcome = TRANSACTION_SUCCESFUL;
+    
+    private double limit;
+    private long limitPeriod;
 
-    public PreTransactionEvent(Inventory ownerInventory, Inventory clientInventory, ItemStack[] items, double price, Player client, OfflinePlayer owner, Sign sign, TransactionType type) {
+    public PreTransactionEvent(Inventory ownerInventory, Inventory clientInventory, ItemStack[] items, double price, Player client, OfflinePlayer owner, Sign sign, TransactionType type, double limit, long limitPeriod) {
         this.ownerInventory = ownerInventory;
         this.clientInventory = (clientInventory == null ? client.getInventory() : clientInventory);
 
@@ -45,6 +48,9 @@ public class PreTransactionEvent extends Event {
 
         this.sign = sign;
         this.transactionType = type;
+        
+        this.limit = limit;
+        this.limitPeriod = limitPeriod;
     }
 
     /**
@@ -177,6 +183,14 @@ public class PreTransactionEvent extends Event {
 
     public static HandlerList getHandlerList() {
         return handlers;
+    }
+    
+    public double getLimit() {
+    	return limit;
+    }
+    
+    public long getLimitPeriod() {
+    	return limitPeriod;
     }
 
     public enum TransactionOutcome {
