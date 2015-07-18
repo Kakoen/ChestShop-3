@@ -1,5 +1,6 @@
 package com.Acrobot.ChestShop.Listeners.PreShopCreation;
 
+import com.Acrobot.Breeze.Utils.NumberUtil;
 import com.Acrobot.Breeze.Utils.PriceUtil;
 import com.Acrobot.ChestShop.Events.PreShopCreationEvent;
 
@@ -20,6 +21,8 @@ public class PriceChecker implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public static void onPreShopCreation(PreShopCreationEvent event) {
         String line = event.getSignLine(PRICE_LINE).toUpperCase();
+        line = line.replaceAll("(\\.\\d*?[1-9])0+", "$1"); //remove trailing zeroes
+
         String[] part = line.split(":");
         
         int buy = 0;

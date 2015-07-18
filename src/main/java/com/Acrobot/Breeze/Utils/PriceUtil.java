@@ -51,7 +51,7 @@ public class PriceUtil {
     }
 
     /**
-     * Gets the buy price from te text
+     * Gets the buy price from the text
      *
      * @param text Text to check
      * @return Buy price
@@ -61,7 +61,7 @@ public class PriceUtil {
     }
 
     /**
-     * Gets the sell price from te text
+     * Gets the sell price from the text
      *
      * @param text Text to check
      * @return Sell price
